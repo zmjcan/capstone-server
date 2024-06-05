@@ -2,7 +2,7 @@ require("dotenv").config();
 
 const express = require("express");
 const knex = require("knex")(require("./knexfile"));
-// const apiRoutes = require("./routes/apiRoutes");
+const apiRoutes = require("./routes/apiRoutes");
 const cors = require("cors");
 
 const PORT = process.env.PORT || 8080;
@@ -12,7 +12,7 @@ const app = express();
 // app.use(cors({ origin: CORS_ORIGIN }));
 app.use(express.json());
 
-// app.use("/api", apiRoutes);
+app.use("/api", apiRoutes);
 
 
 app.listen(PORT, () =>{

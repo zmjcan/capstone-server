@@ -3,7 +3,7 @@ const knex = require("knex")(require("../knexfile"));
 // GET /pets
 async function getAllPets(req, res) {
   try {
-    const data = await knex("tailfinder");
+    const data = await knex("pets");
     res.status(200).json(data);
   } catch (err) {
     res.status(400).send(`Error retrieving pets info: ${err}`);

@@ -16,13 +16,21 @@ async function getAllPets(req, res) {
 // }
 
 // GET /pets/:petId
-// async function getOnePet(req, res) {
-  
-// }
+async function getOnePet(req, res) {
+  const { petId } = req.params;
+
+  try {
+    const data = await knex("pets").where("id", petId).first();
+    res.status(200).json(data);
+  } catch (err) {
+    res.status(400).send(`Error retrieving warehouses: ${err}`);
+  }
+}
 
 
 
 
 module.exports = {
   getAllPets,
+  getOnePet
 };

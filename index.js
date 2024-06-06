@@ -4,6 +4,8 @@ const express = require("express");
 const knex = require("knex")(require("./knexfile"));
 const apiRoutes = require("./routes/apiRoutes");
 const cors = require("cors");
+const fileupload = require("express-fileupload");
+
 
 const PORT = process.env.PORT || 8080;
 const CORS_ORIGIN = process.env.CORS_ORIGIN || "http://localhost:5173";
@@ -11,6 +13,8 @@ const app = express();
 
 app.use(cors({ origin: CORS_ORIGIN }));
 app.use(express.json());
+app.use(fileupload());
+
 
 app.use("/api", apiRoutes);
 

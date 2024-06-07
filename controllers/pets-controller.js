@@ -12,10 +12,6 @@ async function getAllPets(req, res) {
 
 // POST /pets/
 async function postOnePet(req, res) {
-  // console.log(req.files); // the uploaded file object
-  // console.log(req.files); // the uploaded file object
-  // let file = req.files;  // here is the field name of the form
-
 
   if (
     !req.body ||
@@ -35,7 +31,7 @@ async function postOnePet(req, res) {
     const newPet = await knex("pets").where("id", newId[0]).first();
     return res.status(201).json(newPet);
   } catch (err) {
-    return res.status(500).send(`Error posting warehouse: ${err}`);
+    return res.status(500).send(`Error posting pet: ${err}`);
   }
 }
 

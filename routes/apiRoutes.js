@@ -1,5 +1,7 @@
 const router = require("express").Router();
 const petsController = require("../controllers/pets-controller");
+const imgController = require("../controllers/img-controller");
+
 
 router
   .route("/pets")
@@ -12,7 +14,8 @@ router
   .patch(petsController.updateOnePet);
 
 router
-  .route("/pets/upload")
-  .post(petsController.uploadImg);
+  .route("/upload")
+  // .get(imgController.getImg)
+  .post(imgController.uploadImg);
 
 module.exports = router;

@@ -15,7 +15,7 @@ router
 
 router
   .route("/upload")
-  .get(imgController.getImg)
+  // .get(imgController.getImg)
   .post(imgController.uploadImg);
 
 module.exports = router;

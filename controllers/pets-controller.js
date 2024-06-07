@@ -14,7 +14,7 @@ async function getAllPets(req, res) {
 async function postOnePet(req, res) {
   // console.log(req.files); // the uploaded file object
   // console.log(req.files); // the uploaded file object
-  // let file = req.files;  // here is the field name of the form
+  // let file = req.files;  //  field name of the form
 
 
   if (

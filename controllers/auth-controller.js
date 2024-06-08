@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 
 async function postUser(req, res) {
   const { user_name, user_email, user_password } = req.body;
-  const encryptedPW = bcrypt.hashSync(user_password);
+  // const encryptedPW = bcrypt.hashSync(user_password);
 
   if (
     !req.body ||
@@ -20,8 +20,8 @@ async function postUser(req, res) {
     await knex("users").insert({
       user_name,
       user_email,
-      // user_password,
-      user_password: encryptedPW,
+      user_password,
+      // user_password: encryptedPW,
     });
     res.status(201).json({ success: true });
   } catch (err) {

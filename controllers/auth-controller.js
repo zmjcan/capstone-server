@@ -1,10 +1,11 @@
 const knex = require("knex")(require("../knexfile"));
-// const jwt = require("jsonwebtoken");
-// const bcrypt = require("bcryptjs");
+const express = require("express");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 async function postUser(req, res) {
   const { user_name, user_email, user_password } = req.body;
-  //   const encryptedPW = bcrypt.hashSync(user_password);
+    const encryptedPW = bcrypt.hashSync(user_password);
 
   if (
     !req.body ||
@@ -19,8 +20,8 @@ async function postUser(req, res) {
     await knex("users").insert({
       user_name,
       user_email,
-      user_password,
-      //   user_password: encryptedPW,
+      // user_password,
+        user_password: encryptedPW,
     });
     res.status(201).json({ success: true });
   } catch (err) {
@@ -43,16 +44,17 @@ async function loginUser(req, res) {
       return res.status(400).send("Email is not registered, try again");
     }
 
-    // if (!bcrypt.compareSync(user_password, user.user_password)) {
-    //   return res.status(400).send("Either email or password is incorrect, try again");
-    // }
+    if (!bcrypt.compareSync(user_password, user.user_password)) {
+      return res.status(400).send("Either email or password is incorrect, try again");
+    }
 
     if (user_password === user.user_password) {
       return res.status(200).send("Successfully logged-in!");
     } else return res.status(401).send("Login failed.");
 
-    // const token = jwt.sign({ user_email: user.user_email }, process.env.JWT_SECRET);
-    // res.json({ token });
+    const token = jwt.sign({ user_email: user.user_email }, process.env.JWT_SECRET);
+    res.json({ token });
+
   } catch (err) {
     res.status(401).send("Error login.");
   }
